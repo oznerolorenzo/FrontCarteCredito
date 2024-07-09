@@ -9,21 +9,33 @@ import { environment } from 'src/environments/environment';
 export class CreditcardService {
   constructor(private http: HttpClient) {}
 
-  private baseUrl = `${environment.HOST_DOMAIN}/api/credit-cards`;
+  private baseUrl = `${environment.HOST_DOMAIN}/api`;
 
   getAll(limit: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/lista?max=${limit}`);
+    return this.http.get(`${this.baseUrl}/credit-cards/lista?max=${limit}`);
   }
 
   addCard(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/creare`, data);
+    return this.http.post(`${this.baseUrl}/credit-cards/creare`, data);
   }
 
   searchByLastName(lastName: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/cercare?cognome=${lastName}`);
+    return this.http.get(`${this.baseUrl}/credit-cards/cercare?cognome=${lastName}`);
   }
 
   checkExpiry(id: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/scaduta/${id}`);
+    return this.http.get(`${this.baseUrl}/credit-cards/scaduta/${id}`);
+  }
+  addRicarica(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/ricariche/crea`, data);
+  }
+
+  getRicaricheByCartaCreditoID(cartaCreditoID: number, max: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/ricariche/list?cartaCreditoID=${cartaCreditoID}&max=${max}`);
+  }
+
+  getRicaricheBetweenDates(cartaCreditoID: number, dataMin: string, dataMax: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/ricariche/ricerca-date?cartaCreditoID=${cartaCreditoID}&dataMin=${dataMin}&dataMax=${dataMax}`);
+
   }
 }

@@ -1,0 +1,57 @@
+<h2>Ricariche tra Due Date</h2>
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <div class="form-group">
+    <label for="cartaCreditoID">ID Carta di Credito</label>
+    <input type="text" id="cartaCreditoID" formControlName="cartaCreditoID" class="form-control"/>
+    <div *ngIf="searchForm.get('cartaCreditoID')?.invalid && (searchForm.get('cartaCreditoID')?.touched || searchForm.get('cartaCreditoID')?.dirty)"
+         class="text-danger">
+      Inserisci un ID valido della carta di credito.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="dataMin">Data Inizio</label>
+    <input type="date" id="dataMin" formControlName="dataMin" class="form-control"/>
+    <div *ngIf="searchForm.get('dataMin')?.invalid && (searchForm.get('dataMin')?.touched || searchForm.get('dataMin')?.dirty)"
+         class="text-danger">
+      Inserisci una data di inizio valida.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="dataMax">Data Fine</label>
+    <input type="date" id="dataMax" formControlName="dataMax" class="form-control"/>
+    <div *ngIf="searchForm.get('dataMax')?.invalid && (searchForm.get('dataMax')?.touched || searchForm.get('dataMax')?.dirty)"
+         class="text-danger">
+      Inserisci una data di fine valida.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="searchForm.invalid">Cerca</button>
+</form>
+
+<div *ngIf="ricariche.length > 0" class="mt-4">
+  <h3>Risultati della Ricerca</h3>
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>ID Ricarica</th>
+      <th>ID Carta di Credito</th>
+      <th>Data Ricarica</th>
+      <th>Importo Ricarica</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ricarica of ricariche">
+      <td>{{ ricarica.ricaricaID }}</td>
+      <td>{{ ricarica.cartaCreditoID }}</td>
+      <td>{{ ricarica.dataRicarica | date: 'shortDate' }}</td>
+      <td>{{ ricarica.importoRicarica | currency: 'EUR' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="ricariche.length === 0" class="text-center mt-4">
+  <p>Nessuna ricarica trovata per le date specificate.</p>
+</div>

@@ -1,0 +1,31 @@
+<h2>Nuova Ricarica</h2>
+<form [formGroup]="ricaricaForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="cartaCreditoID">ID Carta di Credito</label>
+    <input type="text" id="cartaCreditoID" formControlName="cartaCreditoID" class="form-control"/>
+    <div *ngIf="ricaricaForm.get('cartaCreditoID')?.invalid && (ricaricaForm.get('cartaCreditoID')?.touched || ricaricaForm.get('cartaCreditoID')?.dirty)"
+         class="text-danger">
+      Inserisci un ID valido della carta di credito.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="dataRicarica">Data Ricarica</label>
+    <input type="date" id="dataRicarica" formControlName="dataRicarica" class="form-control"/>
+    <div *ngIf="ricaricaForm.get('dataRicarica')?.invalid && (ricaricaForm.get('dataRicarica')?.touched || ricaricaForm.get('dataRicarica')?.dirty)"
+         class="text-danger">
+      Inserisci una data valida.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="importoRicarica">Importo Ricarica</label>
+    <input type="number" id="importoRicarica" formControlName="importoRicarica" class="form-control"/>
+    <div *ngIf="ricaricaForm.get('importoRicarica')?.invalid && (ricaricaForm.get('importoRicarica')?.touched || ricaricaForm.get('importoRicarica')?.dirty)"
+         class="text-danger">
+      Inserisci un importo valido per la ricarica.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="ricaricaForm.invalid">Aggiungi Ricarica</button>
+</form>

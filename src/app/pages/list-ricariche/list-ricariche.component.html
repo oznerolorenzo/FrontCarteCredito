@@ -1,0 +1,48 @@
+<h2>Lista Ricariche per Carta di Credito</h2>
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <div class="form-group">
+    <label for="cartaCreditoID">ID Carta di Credito</label>
+    <input type="text" id="cartaCreditoID" formControlName="cartaCreditoID" class="form-control"/>
+    <div *ngIf="searchForm.get('cartaCreditoID')?.invalid && (searchForm.get('cartaCreditoID')?.touched || searchForm.get('cartaCreditoID')?.dirty)"
+         class="text-danger">
+      Inserisci un ID valido della carta di credito.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="max">Numero massimo di ricariche da visualizzare</label>
+    <input type="number" id="max" formControlName="max" class="form-control"/>
+    <div *ngIf="searchForm.get('max')?.invalid && (searchForm.get('max')?.touched || searchForm.get('max')?.dirty)"
+         class="text-danger">
+      Inserisci un numero massimo valido.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="searchForm.invalid">Cerca</button>
+</form>
+
+<div *ngIf="ricariche.length > 0" class="mt-4">
+  <h3>Risultati della Ricerca</h3>
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>ID Ricarica</th>
+      <th>ID Carta di Credito</th>
+      <th>Data Ricarica</th>
+      <th>Importo Ricarica</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ricarica of ricariche">
+      <td>{{ ricarica.ricaricaID }}</td>
+      <td>{{ ricarica.cartaCreditoID }}</td>
+      <td>{{ ricarica.dataRicarica | date: 'shortDate' }}</td>
+      <td>{{ ricarica.importoRicarica | currency: 'EUR' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="ricariche.length === 0" class="text-center mt-4">
+  <p>Nessuna ricarica trovata per l'ID carta di credito specificato.</p>
+</div>
