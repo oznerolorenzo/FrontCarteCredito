@@ -1,0 +1,39 @@
+<h2>Ricerca Carte di Credito per Cognome</h2>
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <div class="form-group">
+    <label for="lastName">Cognome</label>
+    <input type="text" id="lastName" formControlName="lastName" class="form-control"/>
+    <div *ngIf="searchForm.get('lastName')?.invalid && (searchForm.get('lastName')?.touched || searchForm.get('lastName')?.dirty)" class="text-danger">
+      Inserisci un cognome valido.
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="searchForm.invalid">Cerca</button>
+</form>
+
+<div *ngIf="(results?.length || 1) > 0 " class="mt-4">
+  <h3>Risultati della Ricerca</h3>
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Numero Carta di Credito</th>
+      <th>Titolare</th>
+      <th>Scadenza</th>
+      <th>Credito Residuo</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let card of results">
+      <td>{{ card._id }}</td>
+      <td>{{ card.numeroCartaCredito }}</td>
+      <td>{{ card.titolare }}</td>
+      <td>{{ card.scadenza | date: 'shortDate' }}</td>
+      <td>{{ card.creditoResiduo | currency: 'EUR' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="results?.length === 0" class="text-center mt-4">
+  <p>Nessuna carta di credito trovata per il cognome specificato.</p>
+</div>

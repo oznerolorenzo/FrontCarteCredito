@@ -1,0 +1,15 @@
+.form-group {
+  margin-bottom: 1rem;
+}
+
+button {
+  margin-top: 1rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.text-danger, .text-success {
+  font-weight: bold;
+}

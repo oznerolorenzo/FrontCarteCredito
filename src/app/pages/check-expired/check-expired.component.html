@@ -1,0 +1,21 @@
+<h2>Controlla Scadenza Carta di Credito</h2>
+<form [formGroup]="checkForm" (ngSubmit)="onCheck()">
+  <div class="form-group">
+    <label for="cardId">ID Carta di Credito</label>
+    <input type="text" id="cardId" formControlName="cardId" class="form-control" />
+    <div *ngIf="checkForm.get('cardId')?.invalid && (checkForm.get('cardId')?.touched || checkForm.get('cardId')?.dirty)" class="text-danger">
+      Inserisci un ID valido della carta di credito.
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="checkForm.invalid">Controlla</button>
+</form>
+
+<div *ngIf="isExpired !== null" class="mt-4">
+  <h3>Risultato</h3>
+  <p *ngIf="isExpired" class="text-danger">La carta è scaduta.</p>
+  <p *ngIf="!isExpired" class="text-success">La carta non è scaduta.</p>
+</div>
+
+<div *ngIf="errorMessage" class="mt-4 text-danger">
+  <p>{{ errorMessage }}</p>
+</div>

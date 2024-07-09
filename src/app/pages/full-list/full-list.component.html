@@ -1,0 +1,26 @@
+<h2>Lista Completa delle Carte di Credito</h2>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>Numero Carta di Credito</th>
+      <th>Titolare</th>
+      <th>Scadenza</th>
+      <th>Credito Residuo</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let card of creditCards">
+      <td>{{ card.numeroCartaCredito }}</td>
+      <td>{{ card.titolare }}</td>
+      <td>{{ card.scadenza | date: 'shortDate' }}</td>
+      <td>{{ card.creditoResiduo | currency: 'EUR' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="creditCards.length === 0" class="text-center mt-4">
+  <p>Nessuna carta di credito trovata.</p>
+</div>

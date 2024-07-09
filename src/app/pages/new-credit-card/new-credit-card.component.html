@@ -1,0 +1,40 @@
+<h2>Nuova Carta di Credito</h2>
+<form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="numeroCartaCredito">Numero Carta di Credito</label>
+    <input type="text" id="NumeroCartaCredito" formControlName="numeroCartaCredito" class="form-control"/>
+    <div *ngIf="cardForm.get('numeroCartaCredito')?.invalid && (cardForm.get('numeroCartaCredito')?.touched ||
+    cardForm.get('numeroCartaCredito')?.dirty)" class="text-danger">
+      Numero Carta di Credito deve essere di 16 cifre.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="titolare">Titolare</label>
+    <input type="text" id="titolare" formControlName="titolare" class="form-control"/>
+    <div *ngIf="cardForm.get('titolare')?.invalid && (cardForm.get('titolare')?.touched || cardForm.get('titolare')?.dirty)"
+         class="text-danger">
+      Inserisci il nome del titolare.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="scadenza">Scadenza</label>
+    <input type="date" id="scadenza" formControlName="scadenza" class="form-control"/>
+    <div *ngIf="cardForm.get('scadenza')?.invalid && (cardForm.get('scadenza')?.touched || cardForm.get('scadenza')?.dirty)"
+         class="text-danger">
+      Inserisci una data di scadenza valida.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="creditoResiduo">Credito Residuo</label>
+    <input type="number" id="creditoResiduo" formControlName="creditoResiduo" class="form-control"/>
+    <div *ngIf="cardForm.get('creditoResiduo')?.invalid && (cardForm.get('creditoResiduo')?.touched ||
+    cardForm.get('creditoResiduo')?.dirty)" class="text-danger">
+      Inserisci un importo valido per il Credito Residuo.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="cardForm.invalid">Aggiungi Carta</button>
+</form>

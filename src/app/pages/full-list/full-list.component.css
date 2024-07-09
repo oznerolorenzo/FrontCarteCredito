@@ -1,0 +1,12 @@
+.table-responsive {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  vertical-align: middle;
+}
